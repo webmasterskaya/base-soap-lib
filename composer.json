@@ -1,7 +1,8 @@
 {
+	"name": "webmasterskaya/base-soap-lib",
 	"autoload": {
 		"psr-4": {
-			"Webmasterskaya\\SoapBase\\" : "src/"
+			"Webmasterskaya\\Soap\\Base\\" : "src/"
 		}
 	},
 	"require": {
