@@ -4,44 +4,38 @@ namespace Webmasterskaya\Soap\Base;
 
 use Webmasterskaya\Soap\Base\Helper\ClassHelper;
 
-class Client extends \Laminas\Soap\Client
+abstract class Client extends \Laminas\Soap\Client implements ClientInterface
 {
 	/**
 	 * @var array
 	 */
-	protected $classmapAliases;
+	protected $aliases;
 
 	/**
 	 * Last invoked request class
 	 *
 	 * @var string
 	 */
-	protected $lastCalling = '';
+	protected $lastClass = '';
 
 	public function setClassmap(array $classmap)
 	{
-		$aliases = [];
+		$classmap = array_merge($this->getDefaultClassMap(), $classmap);
 
-		foreach ($classmap as $type => $class)
+		foreach ($classmap as $wsdlType => $phpClassName)
 		{
-			if (!class_exists($class))
+			if (!class_exists($phpClassName))
 			{
-				throw new \Laminas\Soap\Exception\InvalidArgumentException('Invalid class in class map: ' . $class);
+				throw new \Laminas\Soap\Exception\InvalidArgumentException('Invalid class in class map: ' . $phpClassName);
 			}
 
-			$aliases[strtolower($type)] = $class;
+			$this->classmap[$wsdlType] = $phpClassName;
+			$this->alias(strtolower($wsdlType), $wsdlType);
 		}
 
-		$this->classmap        = $classmap;
-		$this->classmapAliases = $aliases;
-		$this->soapClient      = null;
+		$this->soapClient = null;
 
 		return $this;
-	}
-
-	public function getClassMapAliases()
-	{
-		return $this->classmapAliases;
 	}
 
 	/**
@@ -49,35 +43,35 @@ class Client extends \Laminas\Soap\Client
 	 *
 	 * @return string
 	 */
-	public function getLastCalling()
+	public function getLastClass()
 	{
-		return $this->lastCalling;
+		return $this->lastClass;
 	}
 
 	public function __call($name, $arguments)
 	{
-		$aliases = $this->getClassMapAliases();
+		$phpClassName = $this->resolveAlias($name);
 
-		if (!isset($aliases[strtolower($name)]))
+		$classMap = $this->getClassMap();
+
+		if (!isset($classMap[$phpClassName]))
 		{
 			throw new \Laminas\Soap\Exception\InvalidArgumentException('Invalid SOAP method: ' . $name);
 		}
 
-		$class = $aliases[strtolower($name)];
-
-		if (!ClassHelper::shouldImplement($class, '\\Webmasterskaya\\Soap\\Base\\Type\\RequestInterface'))
+		if (!ClassHelper::shouldImplement($phpClassName, '\\Webmasterskaya\\Soap\\Base\\Type\\RequestInterface'))
 		{
 			throw new \Laminas\Soap\Exception\InvalidArgumentException('SOAP method must should implement of RequestInterface');
 		}
 
-		$this->lastCalling = $class;
+		$this->lastClass = $phpClassName;
 
 		parent::__call($name, $arguments);
 	}
 
 	protected function _preProcessArguments($arguments)
 	{
-		return new $this->lastCalling($arguments);
+		return new $this->lastClass(...$arguments);
 	}
 
 	protected function _preProcessResult($result)
@@ -85,5 +79,17 @@ class Client extends \Laminas\Soap\Client
 		var_dump($result);
 
 		return $result;
+	}
+
+	public function alias($alias, $key)
+	{
+		$this->aliases[$alias] = $key;
+
+		return $this;
+	}
+
+	protected function resolveAlias($resourceName)
+	{
+		return $this->aliases[$resourceName] ?? $this->aliases[strtolower($resourceName)] ?? $resourceName;
 	}
 }
