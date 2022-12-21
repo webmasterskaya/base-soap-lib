@@ -59,12 +59,14 @@ abstract class Client extends \Laminas\Soap\Client implements ClientInterface
 			throw new \Laminas\Soap\Exception\InvalidArgumentException('Invalid SOAP method: ' . $name);
 		}
 
-		if (!ClassHelper::shouldImplement($phpClassName, '\\Webmasterskaya\\Soap\\Base\\Type\\RequestInterface'))
+		$phpClass = $classMap[$phpClassName];
+
+		if (!ClassHelper::shouldImplement($phpClass, '\\Webmasterskaya\\Soap\\Base\\Type\\RequestInterface'))
 		{
 			throw new \Laminas\Soap\Exception\InvalidArgumentException('SOAP method must should implement of RequestInterface');
 		}
 
-		$this->lastClass = $phpClassName;
+		$this->lastClass = $phpClass;
 
 		parent::__call($name, $arguments);
 	}
