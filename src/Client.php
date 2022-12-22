@@ -90,7 +90,7 @@ abstract class Client extends \Laminas\Soap\Client implements ClientInterface
             throw new InvalidArgumentException('SOAP method must should implement of RequestInterface');
         }
 
-        parent::__call($name, $arguments);
+        return parent::__call($name, $arguments);
     }
 
     protected function _preProcessArguments($arguments)
@@ -103,8 +103,6 @@ abstract class Client extends \Laminas\Soap\Client implements ClientInterface
 
     protected function _preProcessResult($result)
     {
-        var_dump($result);
-
         return $result;
     }
 
