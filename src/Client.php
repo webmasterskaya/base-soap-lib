@@ -98,7 +98,7 @@ abstract class Client extends \Laminas\Soap\Client implements ClientInterface
         $lastMethod = $this->getLastMethod();
         $phpClass = $this->getFromClassMap($lastMethod);
 
-        return new $phpClass(...$arguments);
+        return [new $phpClass(...$arguments)];
     }
 
     protected function _preProcessResult($result)
