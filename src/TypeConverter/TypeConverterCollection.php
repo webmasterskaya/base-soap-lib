@@ -2,6 +2,7 @@
 
 namespace Webmasterskaya\Soap\Base\TypeConverter;
 
+use ArrayIterator;
 use IteratorAggregate;
 use Webmasterskaya\Soap\Base\Exception\InvalidArgumentException;
 
@@ -24,11 +25,7 @@ class TypeConverterCollection implements IteratorAggregate
         }
     }
 
-    /**
-     * @param TypeConverterInterface $converter
-     *
-     * @return string
-     */
+
     private function serialize(TypeConverterInterface $converter): string
     {
         return $converter->getTypeNamespace() . ':' . $converter->getTypeName();
@@ -39,8 +36,6 @@ class TypeConverterCollection implements IteratorAggregate
      *
      * @param TypeConverterInterface $converter Type converter
      *
-     * @return TypeConverterCollection
-     * @throws InvalidArgumentException
      */
     public function add(TypeConverterInterface $converter): self
     {
@@ -58,7 +53,6 @@ class TypeConverterCollection implements IteratorAggregate
      *
      * @param TypeConverterInterface $converter Type converter
      *
-     * @return TypeConverterCollection
      */
     public function set(TypeConverterInterface $converter): self
     {
@@ -72,9 +66,7 @@ class TypeConverterCollection implements IteratorAggregate
      * Returns true if the collection contains a type converter for a certain
      * namespace and name
      *
-     * @param TypeConverterInterface $converter
      *
-     * @return bool
      */
     public function has(TypeConverterInterface $converter): bool
     {
@@ -87,10 +79,10 @@ class TypeConverterCollection implements IteratorAggregate
     }
 
     /**
-     * @return \ArrayIterator|TypeConverterInterface[]
+     * @return ArrayIterator<array-key, TypeConverterInterface>
      */
-    public function getIterator(): \ArrayIterator
+    public function getIterator(): ArrayIterator
     {
-        return new \ArrayIterator($this->converters);
+        return new ArrayIterator($this->converters);
     }
 }
