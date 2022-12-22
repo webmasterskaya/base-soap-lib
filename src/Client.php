@@ -2,96 +2,121 @@
 
 namespace Webmasterskaya\Soap\Base;
 
+use Webmasterskaya\Soap\Base\Exception\InvalidArgumentException;
 use Webmasterskaya\Soap\Base\Helper\ClassHelper;
+use Webmasterskaya\Soap\Base\TypeConverter\TypeConverterInterface;
 
 abstract class Client extends \Laminas\Soap\Client implements ClientInterface
 {
-	/**
-	 * @var array
-	 */
-	protected $aliases;
+    /**
+     * @var array
+     */
+    protected $aliases;
 
-	/**
-	 * Last invoked request class
-	 *
-	 * @var string
-	 */
-	protected $lastClass = '';
+    public function setClassmap(array $classmap)
+    {
+        parent::setClassmap($classmap);
 
-	public function setClassmap(array $classmap)
-	{
-		$classmap = array_merge($this->getDefaultClassMap(), $classmap);
+        $aliases = [];
 
-		foreach ($classmap as $wsdlType => $phpClassName)
-		{
-			if (!class_exists($phpClassName))
-			{
-				throw new \Laminas\Soap\Exception\InvalidArgumentException('Invalid class in class map: ' . $phpClassName);
-			}
+        foreach ($this->getClassmap() as $wsdlType => $phpClassName) {
+            $aliases[strtolower($wsdlType)] = $wsdlType;
+        }
 
-			$this->classmap[$wsdlType] = $phpClassName;
-			$this->alias(strtolower($wsdlType), $wsdlType);
-		}
+        $this->aliases = $aliases;
 
-		$this->soapClient = null;
+        return $this;
+    }
 
-		return $this;
-	}
+    public function setTypemap(array $typeMap)
+    {
+        $newTypeMap = [];
 
-	/**
-	 * Retrieve last invoked request class
-	 *
-	 * @return string
-	 */
-	public function getLastClass()
-	{
-		return $this->lastClass;
-	}
+        foreach ($typeMap as $type) {
+            // Classic array configuration
+            if (!$type instanceof TypeConverterInterface) {
+                if (!is_callable($type['from_xml'])) {
+                    throw new Exception\InvalidArgumentException(sprintf(
+                        'Invalid from_xml callback for type: %s',
+                        $type['type_name']
+                    ));
+                }
 
-	public function __call($name, $arguments)
-	{
-		$phpClassName = $this->resolveAlias($name);
+                if (!is_callable($type['to_xml'])) {
+                    throw new Exception\InvalidArgumentException(sprintf(
+                        'Invalid to_xml callback for type: %s',
+                        $type['type_name']
+                    ));
+                }
 
-		$classMap = $this->getClassMap();
+                $newTypeMap[] = $type;
+                continue;
+            }
 
-		if (!isset($classMap[$phpClassName]))
-		{
-			throw new \Laminas\Soap\Exception\InvalidArgumentException('Invalid SOAP method: ' . $name);
-		}
+            $newTypeMap[] = [
+                'type_name' => $type->getTypeName(),
+                'type_ns' => $type->getTypeNamespace(),
+                'from_xml' => function ($input) use ($type) {
+                    return $type->convertXmlToPhp($input);
+                },
+                'to_xml' => function ($input) use ($type) {
+                    return $type->convertPhpToXml($input);
+                },
+            ];
+        }
 
-		$phpClass = $classMap[$phpClassName];
+        $this->typemap = $newTypeMap;
+        $this->soapClient = null;
+        return $this;
+    }
 
-		if (!ClassHelper::shouldImplement($phpClass, Type\RequestInterface::class))
-		{
-			throw new \Laminas\Soap\Exception\InvalidArgumentException('SOAP method must should implement of RequestInterface');
-		}
+    public function getFromClassMap($key)
+    {
+        $classMap = $this->getClassMap();
+        $wsdlTypeName = $this->resolveAlias($key);
 
-		$this->lastClass = $phpClass;
+        if (!isset($classMap[$wsdlTypeName])) {
+            throw new InvalidArgumentException('Invalid SOAP method: ' . $key);
+        }
 
-		parent::__call($name, $arguments);
-	}
+        return $classMap[$wsdlTypeName];
+    }
 
-	protected function _preProcessArguments($arguments)
-	{
-		return new $this->lastClass(...$arguments);
-	}
+    public function __call($name, $arguments)
+    {
+        $phpClass = $this->getFromClassMap($name);
 
-	protected function _preProcessResult($result)
-	{
-		var_dump($result);
+        if (!ClassHelper::shouldImplement($phpClass, Type\RequestInterface::class)) {
+            throw new InvalidArgumentException('SOAP method must should implement of RequestInterface');
+        }
 
-		return $result;
-	}
+        parent::__call($name, $arguments);
+    }
 
-	public function alias($alias, $key)
-	{
-		$this->aliases[$alias] = $key;
+    protected function _preProcessArguments($arguments)
+    {
+        $lastMethod = $this->getLastMethod();
+        $phpClass = $this->getFromClassMap($lastMethod);
 
-		return $this;
-	}
+        return new $phpClass(...$arguments);
+    }
 
-	protected function resolveAlias($resourceName)
-	{
-		return $this->aliases[$resourceName] ?? $this->aliases[strtolower($resourceName)] ?? $resourceName;
-	}
+    protected function _preProcessResult($result)
+    {
+        var_dump($result);
+
+        return $result;
+    }
+
+    public function alias($alias, $key)
+    {
+        $this->aliases[$alias] = $key;
+
+        return $this;
+    }
+
+    protected function resolveAlias($resourceName)
+    {
+        return $this->aliases[$resourceName] ?? $this->aliases[strtolower($resourceName)] ?? $resourceName;
+    }
 }
