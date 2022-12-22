@@ -6,6 +6,7 @@
 		}
 	},
 	"require": {
-		"laminas/laminas-soap": "^2.10"
+		"laminas/laminas-soap": "^2.10",
+		"ext-dom": "*"
 	}
 }
