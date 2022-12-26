@@ -1,12 +1,13 @@
 {
-	"name": "webmasterskaya/base-soap-lib",
-	"autoload": {
-		"psr-4": {
-			"Webmasterskaya\\Soap\\Base\\" : "src/"
-		}
-	},
-	"require": {
-		"laminas/laminas-soap": "^2.10",
-		"ext-dom": "*"
-	}
+  "name": "webmasterskaya/base-soap-lib",
+  "autoload": {
+    "psr-4": {
+      "Webmasterskaya\\Soap\\Base\\": "src/"
+    }
+  },
+  "require": {
+    "ext-dom": "*",
+    "php-soap-backports/ext-soap-engine": "^1.4",
+    "ext-soap": "*"
+  }
 }
