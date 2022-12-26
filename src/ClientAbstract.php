@@ -25,7 +25,7 @@ abstract class ClientAbstract implements ClientInterface
     /**
      * @var array
      */
-    protected $defaults;
+    protected $defaults = [];
 
     public function __construct(
         ExtSoapOptions $options,
