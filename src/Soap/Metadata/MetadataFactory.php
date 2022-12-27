@@ -1,5 +1,6 @@
 <?php
 
+
 namespace Webmasterskaya\Soap\Base\Soap\Metadata;
 
 use Soap\Engine\Metadata\LazyInMemoryMetadata;

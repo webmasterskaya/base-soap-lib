@@ -1,5 +1,6 @@
 <?php
 
+
 namespace Webmasterskaya\Soap\Base\Exception;
 
 use InvalidArgumentException as SPLInvalidArgumentException;

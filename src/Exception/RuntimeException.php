@@ -1,5 +1,6 @@
 <?php
 
+
 namespace Webmasterskaya\Soap\Base\Exception;
 
 use RuntimeException as SPLRuntimeException;

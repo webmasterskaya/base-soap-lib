@@ -1,5 +1,6 @@
 <?php
 
+
 namespace Webmasterskaya\Soap\Base\Exception;
 
 /**
@@ -7,5 +8,4 @@ namespace Webmasterskaya\Soap\Base\Exception;
  */
 interface ExceptionInterface
 {
-
 }

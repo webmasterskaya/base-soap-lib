@@ -1,5 +1,6 @@
 <?php
 
+
 namespace Webmasterskaya\Soap\Base\Type;
 
 class MixedResult implements ResultInterface

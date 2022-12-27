@@ -1,8 +1,9 @@
 <?php
 
+
 namespace Webmasterskaya\Soap\Base;
 
-
+use Exception;
 use Soap\Engine\Engine;
 use Soap\Engine\Transport;
 use Soap\ExtSoapEngine\ExtSoapOptions;
@@ -56,7 +57,7 @@ abstract class ClientAbstract implements ClientInterface
             if (!$result instanceof ResultInterface) {
                 $result = new MixedResult($result);
             }
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             throw SoapException::fromThrowable($exception);
         }
 
