@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Webmasterskaya\Soap\Base\Soap\ExtSoap\Metadata\Detector;
 
 use Soap\Engine\Metadata\Collection\TypeCollection;

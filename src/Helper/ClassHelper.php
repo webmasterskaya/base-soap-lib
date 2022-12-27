@@ -1,14 +1,11 @@
 <?php
 
-
 namespace Webmasterskaya\Soap\Base\Helper;
 
 class ClassHelper
 {
     /**
      * @param object|string $class
-     * @param string $interface
-     * @return bool
      */
     public static function shouldImplement($class, string $interface): bool
     {
@@ -19,8 +16,6 @@ class ClassHelper
 
     /**
      * @param object|string $class
-     * @param string $interface
-     * @return bool
      */
     public static function shouldNotImplement($class, string $interface): bool
     {
@@ -30,7 +25,6 @@ class ClassHelper
     /**
      * @param object|string $class
      * @param object|string $instance
-     * @return bool
      */
     public static function shouldBeAnInstanceOf($class, $instance): bool
     {
@@ -51,7 +45,6 @@ class ClassHelper
     /**
      * @param object|string $class
      * @param object|string $instance
-     * @return bool
      */
     public static function shouldNotBeAnInstanceOf($class, $instance): bool
     {

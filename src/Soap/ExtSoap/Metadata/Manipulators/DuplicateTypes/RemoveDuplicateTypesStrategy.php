@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Webmasterskaya\Soap\Base\Soap\ExtSoap\Metadata\Manipulators\DuplicateTypes;
 
 use Soap\Engine\Metadata\Collection\TypeCollection;

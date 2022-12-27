@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Webmasterskaya\Soap\Base\Soap\Metadata\Manipulators;
 
 use Soap\Engine\Metadata\Collection\TypeCollection;

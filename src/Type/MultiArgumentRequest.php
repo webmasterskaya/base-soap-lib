@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Webmasterskaya\Soap\Base\Type;
 
 class MultiArgumentRequest implements MultiArgumentRequestInterface

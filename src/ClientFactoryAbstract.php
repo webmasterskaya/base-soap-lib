@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Webmasterskaya\Soap\Base;
 
 use RuntimeException;
@@ -167,7 +166,7 @@ abstract class ClientFactoryAbstract implements ClientFactoryInterface
 
     public static function getEmptyClassMap(): ClientClassMapCollectionInterface
     {
-        return new class() implements ClientClassMapCollectionInterface {
+        return new class () implements ClientClassMapCollectionInterface {
             public function __invoke(): ClassMapCollection
             {
                 return new ClassMapCollection();
@@ -177,7 +176,7 @@ abstract class ClientFactoryAbstract implements ClientFactoryInterface
 
     public static function getEmptyTypeMap(): ClientTypeConverterCollectionInterface
     {
-        return new class() implements ClientTypeConverterCollectionInterface {
+        return new class () implements ClientTypeConverterCollectionInterface {
             public function __invoke(): TypeConverterCollection
             {
                 return new TypeConverterCollection();

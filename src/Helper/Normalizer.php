@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Webmasterskaya\Soap\Base\Helper;
 
 use Webmasterskaya\Soap\Base\Exception\RuntimeException;
@@ -120,12 +119,7 @@ class Normalizer
         'numeric'
     ];
 
-    /**
-     * @param string $name
-     * @param string $suffix
-     *
-     * @return string
-     */
+
     private static function normalizeReservedKeywords(string $name, string $suffix): string
     {
         if (!in_array(strtolower($name), self::$reservedKeywords, true)) {
@@ -135,11 +129,7 @@ class Normalizer
         return $name . $suffix;
     }
 
-    /**
-     * @param string $namespace
-     *
-     * @return string
-     */
+
     public static function normalizeNamespace(string $namespace): string
     {
         return trim(str_replace('/', '\\', $namespace), '\\');
@@ -148,10 +138,7 @@ class Normalizer
     /**
      * Convert a word to camelCase or CamelCase (not changing first part!)
      *
-     * @param string $word
-     * @param string $regexp
      *
-     * @return string
      */
     private static function camelCase(string $word, string $regexp): string
     {
@@ -169,11 +156,7 @@ class Normalizer
         throw new RuntimeException('Failed to convert the string');
     }
 
-    /**
-     * @param string $method
-     *
-     * @return string
-     */
+
     public static function normalizeMethodName(string $method): string
     {
         // Methods cant start with a number in PHP - move it after text
@@ -188,11 +171,7 @@ class Normalizer
         return lcfirst(self::camelCase($method, '{[^a-z0-9_]+}i'));
     }
 
-    /**
-     * @param string $name
-     *
-     * @return string
-     */
+
     public static function normalizeClassname(string $name): string
     {
         $name = self::normalizeReservedKeywords($name, 'Type');
@@ -200,11 +179,7 @@ class Normalizer
         return ucfirst(self::camelCase($name, '{[^a-z0-9]+}i'));
     }
 
-    /**
-     * @param string $fqn
-     *
-     * @return string
-     */
+
     public static function normalizeClassnameInFQN(string $fqn): string
     {
         if (self::isKnownType($fqn)) {
@@ -216,21 +191,13 @@ class Normalizer
         return substr($fqn, 0, -1 * strlen($className)) . self::normalizeClassname($className);
     }
 
-    /**
-     * @param string $property
-     *
-     * @return string
-     */
+
     public static function normalizeProperty(string $property): string
     {
         return self::camelCase($property, '{[^a-z0-9_]+}i');
     }
 
-    /**
-     * @param string $type
-     *
-     * @return string
-     */
+
     public static function normalizeDataType(string $type): string
     {
         $searchType = strtolower($type);
@@ -243,22 +210,13 @@ class Normalizer
         return in_array($type, self::$normalizations, true);
     }
 
-    /**
-     * @param string $prefix
-     * @param string $property
-     *
-     * @return string
-     */
+
     public static function generatePropertyMethod(string $prefix, string $property): string
     {
         return strtolower($prefix) . ucfirst(self::normalizeProperty($property));
     }
 
-    /**
-     * @param string $name
-     *
-     * @return string
-     */
+
     public static function getClassNameFromFQN(string $name): string
     {
         $arr = explode('\\', $name);
@@ -272,12 +230,7 @@ class Normalizer
         throw new RuntimeException('Failed to get class name from FQN');
     }
 
-    /**
-     * @param string $useName
-     * @param string|null $useAlias
-     *
-     * @return string
-     */
+
     public static function getCompleteUseStatement(string $useName, string $useAlias = null): string
     {
         $use = $useName;

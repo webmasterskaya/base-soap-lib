@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Webmasterskaya\Soap\Base\Soap\ExtSoap\Configuration;
 
 use Soap\ExtSoapEngine\Configuration\TypeConverter\TypeConverterCollection;

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Webmasterskaya\Soap\Base\Soap\ExtSoap\Metadata\Manipulators\DuplicateTypes;
 
 use Soap\Engine\Metadata\Collection\PropertyCollection;
@@ -49,8 +48,8 @@ class IntersectDuplicateTypesStrategy implements TypesManipulatorInterface
                 new PropertyCollection(...array_merge(
                     ...$duplicateTypes->map(
                         static function (Type $type): array {
-                        return iterator_to_array($type->getProperties());
-                    }
+                            return iterator_to_array($type->getProperties());
+                        }
                     )
                 ))
             )
