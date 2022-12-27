@@ -1,18 +1,16 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Webmasterskaya\Soap\Base\Soap\ExtSoap\Metadata\Manipulators\DuplicateTypes;
 
+use Webmasterskaya\Soap\Base\Exception\RuntimeException;
 use Soap\Engine\Metadata\Collection\PropertyCollection;
 use Soap\Engine\Metadata\Collection\TypeCollection;
 use Soap\Engine\Metadata\Model\Property;
 use Soap\Engine\Metadata\Model\Type;
-use Webmasterskaya\Soap\Base\Exception\RuntimeException;
 use Webmasterskaya\Soap\Base\Helper\Normalizer;
 use Webmasterskaya\Soap\Base\Soap\Metadata\Manipulators\TypesManipulatorInterface;
 
-final class IntersectDuplicateTypesStrategy implements TypesManipulatorInterface
+class IntersectDuplicateTypesStrategy implements TypesManipulatorInterface
 {
     public function __invoke(TypeCollection $types): TypeCollection
     {
@@ -22,8 +20,7 @@ final class IntersectDuplicateTypesStrategy implements TypesManipulatorInterface
 
                 if (empty($typeName)) {
                     throw new RuntimeException(
-                        sprintf('The name of the "%s" cannot be an empty string', get_class($type))
-                    );
+                        sprintf('The name of the "%s" cannot be an empty string', get_class($type)));
                 }
 
                 $name = Normalizer::normalizeClassname($typeName);
@@ -49,10 +46,10 @@ final class IntersectDuplicateTypesStrategy implements TypesManipulatorInterface
             $this->uniqueProperties(
                 new PropertyCollection(...array_merge(
                     ...$duplicateTypes->map(
-                        static function (Type $type): array {
+                    static function (Type $type): array {
                         return iterator_to_array($type->getProperties());
                     }
-                    )
+                )
                 ))
             )
         );
@@ -65,8 +62,7 @@ final class IntersectDuplicateTypesStrategy implements TypesManipulatorInterface
 
             if (empty($typeName)) {
                 throw new RuntimeException(
-                    sprintf('The name of the "%s" cannot be an empty string', get_class($type))
-                );
+                    sprintf('The name of the "%s" cannot be an empty string', get_class($type)));
             }
 
             return Normalizer::normalizeClassname($typeName) === $name;

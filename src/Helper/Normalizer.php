@@ -1,18 +1,12 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Webmasterskaya\Soap\Base\Helper;
 
 use Webmasterskaya\Soap\Base\Exception\RuntimeException;
-use function in_array;
-use function strlen;
 
-final class Normalizer
+class Normalizer
 {
-    /**
-     * @var array
-     */
+
     private static $normalizations = [
         'any' => 'mixed',
         'anytype' => 'mixed',
@@ -122,14 +116,14 @@ final class Normalizer
     ];
 
     /**
-     * @param string $name
-     * @param string $suffix
+     * @param non-empty-string $name
+     * @param non-empty-string $suffix
      *
-     * @return string
+     * @return non-empty-string
      */
     private static function normalizeReservedKeywords(string $name, string $suffix): string
     {
-        if (!in_array(strtolower($name), self::$reservedKeywords, true)) {
+        if (!\in_array(strtolower($name), self::$reservedKeywords, true)) {
             return $name;
         }
 
@@ -137,9 +131,10 @@ final class Normalizer
     }
 
     /**
-     * @param string $namespace
+     * @template T of string
+     * @param T $namespace
      *
-     * @return string
+     * @return T
      */
     public static function normalizeNamespace(string $namespace): string
     {
@@ -149,10 +144,10 @@ final class Normalizer
     /**
      * Convert a word to camelCase or CamelCase (not changing first part!)
      *
-     * @param string $word
-     * @param string $regexp
+     * @param non-empty-string $word
+     * @param non-empty-string $regexp
      *
-     * @return string
+     * @return non-empty-string
      */
     private static function camelCase(string $word, string $regexp): string
     {
@@ -171,9 +166,9 @@ final class Normalizer
     }
 
     /**
-     * @param string $method
+     * @param non-empty-string $method
      *
-     * @return string
+     * @return non-empty-string
      */
     public static function normalizeMethodName(string $method): string
     {
@@ -190,9 +185,9 @@ final class Normalizer
     }
 
     /**
-     * @param string $name
+     * @param non-empty-string $name
      *
-     * @return string
+     * @return non-empty-string
      */
     public static function normalizeClassname(string $name): string
     {
@@ -202,9 +197,9 @@ final class Normalizer
     }
 
     /**
-     * @param string $fqn
+     * @param non-empty-string $fqn
      *
-     * @return string
+     * @return non-empty-string
      */
     public static function normalizeClassnameInFQN(string $fqn): string
     {
@@ -214,13 +209,13 @@ final class Normalizer
 
         $className = self::getClassNameFromFQN($fqn);
 
-        return substr($fqn, 0, -1 * strlen($className)) . self::normalizeClassname($className);
+        return substr($fqn, 0, -1 * \strlen($className)) . self::normalizeClassname($className);
     }
 
     /**
-     * @param string $property
+     * @param non-empty-string $property
      *
-     * @return string
+     * @return non-empty-string
      */
     public static function normalizeProperty(string $property): string
     {
@@ -228,9 +223,9 @@ final class Normalizer
     }
 
     /**
-     * @param string $type
+     * @param non-empty-string $type
      *
-     * @return string
+     * @return non-empty-string
      */
     public static function normalizeDataType(string $type): string
     {
@@ -241,14 +236,14 @@ final class Normalizer
 
     public static function isKnownType(string $type): bool
     {
-        return in_array($type, self::$normalizations, true);
+        return \in_array($type, self::$normalizations, true);
     }
 
     /**
-     * @param string $prefix
-     * @param string $property
+     * @param non-empty-string $prefix
+     * @param non-empty-string $property
      *
-     * @return string
+     * @return non-empty-string
      */
     public static function generatePropertyMethod(string $prefix, string $property): string
     {
@@ -256,9 +251,9 @@ final class Normalizer
     }
 
     /**
-     * @param string $name
+     * @param non-empty-string $name
      *
-     * @return string
+     * @return non-empty-string
      */
     public static function getClassNameFromFQN(string $name): string
     {
@@ -274,10 +269,10 @@ final class Normalizer
     }
 
     /**
-     * @param string $useName
-     * @param string|null $useAlias
+     * @param non-empty-string $useName
+     * @param non-empty-string|null $useAlias
      *
-     * @return string
+     * @return non-empty-string
      */
     public static function getCompleteUseStatement(string $useName, string $useAlias = null): string
     {

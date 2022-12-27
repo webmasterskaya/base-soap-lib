@@ -1,17 +1,16 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Webmasterskaya\Soap\Base\Soap\ExtSoap\Metadata\Detector;
 
+use Webmasterskaya\Soap\Base\Exception\RuntimeException;
 use Soap\Engine\Metadata\Collection\TypeCollection;
 use Soap\Engine\Metadata\Model\Type;
-use Webmasterskaya\Soap\Base\Exception\RuntimeException;
 use Webmasterskaya\Soap\Base\Helper\Normalizer;
 
 final class DuplicateTypeNamesDetector
 {
     /**
+     * @param TypeCollection $types
      *
      * @return string[]
      */
@@ -27,8 +26,7 @@ final class DuplicateTypeNamesDetector
                         }
 
                         throw new RuntimeException(
-                            sprintf('The name of the "%s" cannot be an empty string', get_class($type))
-                        );
+                            sprintf('The name of the "%s" cannot be an empty string', get_class($type)));
                     }
                 )),
                 static function (int $count): bool {

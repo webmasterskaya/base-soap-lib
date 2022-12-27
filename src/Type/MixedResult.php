@@ -1,10 +1,8 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Webmasterskaya\Soap\Base\Type;
 
-final class MixedResult implements ResultInterface
+class MixedResult implements ResultInterface
 {
     /**
      * @var mixed

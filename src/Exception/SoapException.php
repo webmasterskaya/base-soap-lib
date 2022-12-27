@@ -1,18 +1,15 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Webmasterskaya\Soap\Base\Exception;
 
-use Throwable;
-
-final class SoapException extends RuntimeException
+class SoapException extends RuntimeException
 {
     /**
+     * @param \Throwable $throwable
      *
      * @return SoapException
      */
-    public static function fromThrowable(Throwable $throwable): self
+    public static function fromThrowable(\Throwable $throwable): self
     {
         return new self($throwable->getMessage(), (int)$throwable->getCode(), $throwable);
     }
