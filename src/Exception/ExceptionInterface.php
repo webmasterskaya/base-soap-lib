@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webmasterskaya\Soap\Base\Exception;
 
 /**
@@ -7,5 +9,4 @@ namespace Webmasterskaya\Soap\Base\Exception;
  */
 interface ExceptionInterface
 {
-
 }

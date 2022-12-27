@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webmasterskaya\Soap\Base\Soap\Metadata;
 
 use Soap\Engine\Metadata\LazyInMemoryMetadata;
 use Soap\Engine\Metadata\Metadata;
 
-class MetadataFactory
+final class MetadataFactory
 {
     public static function lazy(Metadata $metadata): Metadata
     {

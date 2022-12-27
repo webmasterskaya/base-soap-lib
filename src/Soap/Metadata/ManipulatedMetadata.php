@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webmasterskaya\Soap\Base\Soap\Metadata;
 
 use Soap\Engine\Metadata\Collection\MethodCollection;
@@ -8,7 +10,7 @@ use Soap\Engine\Metadata\Metadata;
 use Webmasterskaya\Soap\Base\Soap\Metadata\Manipulators\MethodsManipulatorInterface;
 use Webmasterskaya\Soap\Base\Soap\Metadata\Manipulators\TypesManipulatorInterface;
 
-class ManipulatedMetadata implements Metadata
+final class ManipulatedMetadata implements Metadata
 {
     /**
      * @var Metadata

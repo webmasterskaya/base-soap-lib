@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webmasterskaya\Soap\Base\Soap\ExtSoap\Metadata\Manipulators\DuplicateTypes;
 
 use Soap\Engine\Metadata\Collection\TypeCollection;
@@ -9,7 +11,7 @@ use Webmasterskaya\Soap\Base\Helper\Normalizer;
 use Webmasterskaya\Soap\Base\Soap\ExtSoap\Metadata\Detector\DuplicateTypeNamesDetector;
 use Webmasterskaya\Soap\Base\Soap\Metadata\Manipulators\TypesManipulatorInterface;
 
-class RemoveDuplicateTypesStrategy implements TypesManipulatorInterface
+final class RemoveDuplicateTypesStrategy implements TypesManipulatorInterface
 {
     public function __invoke(TypeCollection $types): TypeCollection
     {
@@ -19,7 +21,8 @@ class RemoveDuplicateTypesStrategy implements TypesManipulatorInterface
             $typeName = $type->getName();
             if (empty($typeName)) {
                 throw new RuntimeException(
-                    sprintf('The name of the "%s" cannot be an empty string', get_class($type)));
+                    sprintf('The name of the "%s" cannot be an empty string', get_class($type))
+                );
             }
 
             return !in_array(

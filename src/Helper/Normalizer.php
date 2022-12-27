@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webmasterskaya\Soap\Base\Helper;
 
 use Webmasterskaya\Soap\Base\Exception\RuntimeException;
+use function in_array;
+use function strlen;
 
-class Normalizer
+final class Normalizer
 {
-
     private static $normalizations = [
         'any' => 'mixed',
         'anytype' => 'mixed',
@@ -123,7 +126,7 @@ class Normalizer
      */
     private static function normalizeReservedKeywords(string $name, string $suffix): string
     {
-        if (!\in_array(strtolower($name), self::$reservedKeywords, true)) {
+        if (!in_array(strtolower($name), self::$reservedKeywords, true)) {
             return $name;
         }
 
@@ -209,7 +212,7 @@ class Normalizer
 
         $className = self::getClassNameFromFQN($fqn);
 
-        return substr($fqn, 0, -1 * \strlen($className)) . self::normalizeClassname($className);
+        return substr($fqn, 0, -1 * strlen($className)) . self::normalizeClassname($className);
     }
 
     /**
@@ -236,7 +239,7 @@ class Normalizer
 
     public static function isKnownType(string $type): bool
     {
-        return \in_array($type, self::$normalizations, true);
+        return in_array($type, self::$normalizations, true);
     }
 
     /**
