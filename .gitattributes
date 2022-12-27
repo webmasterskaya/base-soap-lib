@@ -1,0 +1,5 @@
+/.github            export-ignore
+tools/              export-ignore
+tools/*             binary
+/.gitattributes     export-ignore
+/.gitignore         export-ignore
