@@ -7,5 +7,4 @@ namespace Webmasterskaya\Soap\Base\Exception;
  */
 interface ExceptionInterface
 {
-
 }

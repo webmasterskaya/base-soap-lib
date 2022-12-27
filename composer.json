@@ -1,12 +1,22 @@
 {
-	"name": "webmasterskaya/base-soap-lib",
-	"autoload": {
-		"psr-4": {
-			"Webmasterskaya\\Soap\\Base\\" : "src/"
-		}
-	},
-	"require": {
-		"laminas/laminas-soap": "^2.10",
-		"ext-dom": "*"
-	}
+  "name": "webmasterskaya/base-soap-lib",
+  "description": "Набор базовых классов для построения PHP-SOAP приложения, совместимый с PHP 7.1",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Webmasterskaya\\Soap\\Base\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Artem Vasilev",
+      "email": "dev@webmasterskaya.xyz"
+    }
+  ],
+  "require": {
+    "php": ">=7.1",
+    "php-soap-backports/ext-soap-engine": "^1.4",
+    "symfony/options-resolver": "^4.4"
+  }
 }
