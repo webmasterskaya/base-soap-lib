@@ -4,3 +4,4 @@ tools/*                     binary
 /.gitattributes             export-ignore
 /.gitignore                 export-ignore
 /.php-cs-fixer.dist.php     export-ignore
+/psalm.xml                  export-ignore
