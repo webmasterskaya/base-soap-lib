@@ -6,19 +6,34 @@ namespace Webmasterskaya\Soap\Base\Helper;
 
 final class ClassHelper
 {
-    public static function shouldImplement($class, $interface)
+    /**
+     * @param object|string $class An object (class instance) or a string (class name)
+     * @param string $interface Interface name
+     * @return bool
+     */
+    public static function shouldImplement($class, string $interface): bool
     {
         $interfaces = class_implements($class);
 
         return isset($interfaces[$interface]);
     }
 
-    public static function shouldNotImplement($class, $interface)
+    /**
+     * @param object|string $class An object (class instance) or a string (class name)
+     * @param string $interface Interface name
+     * @return bool
+     */
+    public static function shouldNotImplement($class, string $interface): bool
     {
-        return !static::shouldImplement($class, $interface);
+        return !ClassHelper::shouldImplement($class, $interface);
     }
 
-    public static function shouldBeAnInstanceOf($class, $instance)
+    /**
+     * @param object|string $class An object (class instance) or a string (class name)
+     * @param object|string $instance An object (class instance) or a string (class name)
+     * @return bool
+     */
+    public static function shouldBeAnInstanceOf($class, $instance): bool
     {
         if (is_object($class)) {
             return $class instanceof $instance;
@@ -28,14 +43,19 @@ final class ClassHelper
             return true;
         }
 
-        $parents         = class_parents($class);
+        $parents = class_parents($class);
         $parents[$class] = $class;
 
         return isset($parents[$instance]);
     }
 
-    public static function shouldNotBeAnInstanceOf($class, $instance)
+    /**
+     * @param object|string $class An object (class instance) or a string (class name)
+     * @param object|string $instance An object (class instance) or a string (class name)
+     * @return bool
+     */
+    public static function shouldNotBeAnInstanceOf($class, $instance): bool
     {
-        return !static::shouldBeAnInstanceOf($class, $instance);
+        return !ClassHelper::shouldBeAnInstanceOf($class, $instance);
     }
 }

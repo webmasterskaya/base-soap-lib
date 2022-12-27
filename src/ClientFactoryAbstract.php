@@ -23,7 +23,7 @@ use Webmasterskaya\Soap\Base\Soap\Metadata\MetadataOptions;
 abstract class ClientFactoryAbstract implements ClientFactoryInterface
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected static $clientClass = null;
 
@@ -47,7 +47,9 @@ abstract class ClientFactoryAbstract implements ClientFactoryInterface
 
         $clientOptions = new ExtSoapOptions('', $options);
 
-        $clientOptions->withWsdlProvider(new $wsdlProviderClass());
+        /** @var WsdlProvider $wsdlProvider */
+        $wsdlProvider = new $wsdlProviderClass();
+        $clientOptions->withWsdlProvider($wsdlProvider);
 
         if ($classMap !== null) {
             $clientClassMap = static::mergeClassMapCollections(
@@ -65,8 +67,10 @@ abstract class ClientFactoryAbstract implements ClientFactoryInterface
         }
 
         $clientClass = static::getClientClassName();
+        /** @var ClientInterface $client */
+        $client = new $clientClass($clientOptions, $transport, $metadataOptions);
 
-        return new static::$clientClass($clientOptions, $transport, $metadataOptions);
+        return $client;
     }
 
     public static function mergeClassMapCollections(

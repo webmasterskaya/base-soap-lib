@@ -10,6 +10,9 @@ use function strlen;
 
 final class Normalizer
 {
+    /**
+     * @var array
+     */
     private static $normalizations = [
         'any' => 'mixed',
         'anytype' => 'mixed',
@@ -119,10 +122,10 @@ final class Normalizer
     ];
 
     /**
-     * @param non-empty-string $name
-     * @param non-empty-string $suffix
+     * @param string $name
+     * @param string $suffix
      *
-     * @return non-empty-string
+     * @return string
      */
     private static function normalizeReservedKeywords(string $name, string $suffix): string
     {
@@ -134,10 +137,9 @@ final class Normalizer
     }
 
     /**
-     * @template T of string
-     * @param T $namespace
+     * @param string $namespace
      *
-     * @return T
+     * @return string
      */
     public static function normalizeNamespace(string $namespace): string
     {
@@ -147,10 +149,10 @@ final class Normalizer
     /**
      * Convert a word to camelCase or CamelCase (not changing first part!)
      *
-     * @param non-empty-string $word
-     * @param non-empty-string $regexp
+     * @param string $word
+     * @param string $regexp
      *
-     * @return non-empty-string
+     * @return string
      */
     private static function camelCase(string $word, string $regexp): string
     {
@@ -169,9 +171,9 @@ final class Normalizer
     }
 
     /**
-     * @param non-empty-string $method
+     * @param string $method
      *
-     * @return non-empty-string
+     * @return string
      */
     public static function normalizeMethodName(string $method): string
     {
@@ -188,9 +190,9 @@ final class Normalizer
     }
 
     /**
-     * @param non-empty-string $name
+     * @param string $name
      *
-     * @return non-empty-string
+     * @return string
      */
     public static function normalizeClassname(string $name): string
     {
@@ -200,9 +202,9 @@ final class Normalizer
     }
 
     /**
-     * @param non-empty-string $fqn
+     * @param string $fqn
      *
-     * @return non-empty-string
+     * @return string
      */
     public static function normalizeClassnameInFQN(string $fqn): string
     {
@@ -216,9 +218,9 @@ final class Normalizer
     }
 
     /**
-     * @param non-empty-string $property
+     * @param string $property
      *
-     * @return non-empty-string
+     * @return string
      */
     public static function normalizeProperty(string $property): string
     {
@@ -226,9 +228,9 @@ final class Normalizer
     }
 
     /**
-     * @param non-empty-string $type
+     * @param string $type
      *
-     * @return non-empty-string
+     * @return string
      */
     public static function normalizeDataType(string $type): string
     {
@@ -243,10 +245,10 @@ final class Normalizer
     }
 
     /**
-     * @param non-empty-string $prefix
-     * @param non-empty-string $property
+     * @param string $prefix
+     * @param string $property
      *
-     * @return non-empty-string
+     * @return string
      */
     public static function generatePropertyMethod(string $prefix, string $property): string
     {
@@ -254,9 +256,9 @@ final class Normalizer
     }
 
     /**
-     * @param non-empty-string $name
+     * @param string $name
      *
-     * @return non-empty-string
+     * @return string
      */
     public static function getClassNameFromFQN(string $name): string
     {
@@ -272,10 +274,10 @@ final class Normalizer
     }
 
     /**
-     * @param non-empty-string $useName
-     * @param non-empty-string|null $useAlias
+     * @param string $useName
+     * @param string|null $useAlias
      *
-     * @return non-empty-string
+     * @return string
      */
     public static function getCompleteUseStatement(string $useName, string $useAlias = null): string
     {
