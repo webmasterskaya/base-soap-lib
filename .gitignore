@@ -1,3 +1,4 @@
-vendor
-.idea
-dev
+/vendor/
+composer.lock
+/.idea/
+/dev/
