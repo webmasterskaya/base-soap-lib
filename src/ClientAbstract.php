@@ -43,7 +43,7 @@ abstract class ClientAbstract implements ClientInterface
         $this->engine = DefaultEngineFactory::create($options, $transport, $metadataOptions);
     }
 
-    protected function call(string $method, RequestInterface $request): ResultInterface
+    public function call(string $method, RequestInterface $request): ResultInterface
     {
         try {
             $arguments = ($request instanceof MultiArgumentRequestInterface) ? $request->getArguments() : [$request];
