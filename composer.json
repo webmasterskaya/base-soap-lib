@@ -15,8 +15,10 @@
     }
   ],
   "require": {
-    "php": ">=7.1",
-    "php-soap-backports/ext-soap-engine": "^1.4",
-    "symfony/options-resolver": "^4.4"
+    "php": "~8.2.0 || ~8.3.0 || ~8.4.0",
+    "php-soap/engine": "^2.13",
+    "php-soap/ext-soap-engine": "^1.7",
+    "php-soap/wsdl-reader": "~0.18",
+    "symfony/options-resolver": "^5.4"
   }
 }
