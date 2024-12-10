@@ -2,27 +2,28 @@
 
 namespace Webmasterskaya\Soap\Base\Type;
 
+/**
+ * @template T
+ */
 class MixedResult implements ResultInterface
 {
     /**
-     * @var mixed
+     * @var T
      */
-    private mixed $result;
+    private $result;
 
     /**
-     * MixedResult constructor.
-     *
-     * @param mixed $result
+     * @param T $result
      */
-    public function __construct(mixed $result)
+    public function __construct($result)
     {
         $this->result = $result;
     }
 
     /**
-     * @return mixed
+     * @return T
      */
-    public function getResult(): mixed
+    public function getResult()
     {
         return $this->result;
     }

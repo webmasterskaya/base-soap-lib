@@ -10,8 +10,7 @@ class MultiArgumentRequest implements MultiArgumentRequestInterface
     private array $arguments;
 
     /**
-     * MultiArgumentRequest constructor.
-     *
+     * @param   array  $arguments
      */
     public function __construct(array $arguments)
     {
@@ -19,6 +18,9 @@ class MultiArgumentRequest implements MultiArgumentRequestInterface
     }
 
 
+    /**
+     * @return array
+     */
     public function getArguments(): array
     {
         return $this->arguments;
