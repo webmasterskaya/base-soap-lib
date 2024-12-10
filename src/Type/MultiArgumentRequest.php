@@ -7,7 +7,7 @@ class MultiArgumentRequest implements MultiArgumentRequestInterface
     /**
      * @var array
      */
-    private $arguments;
+    private array $arguments;
 
     /**
      * MultiArgumentRequest constructor.

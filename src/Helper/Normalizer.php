@@ -3,15 +3,13 @@
 namespace Webmasterskaya\Soap\Base\Helper;
 
 use Webmasterskaya\Soap\Base\Exception\RuntimeException;
-use function in_array;
-use function strlen;
 
 class Normalizer
 {
     /**
      * @var array
      */
-    private static $normalizations = [
+    private static array $normalizations = [
         'any' => 'mixed',
         'anytype' => 'mixed',
         'long' => 'int',
@@ -34,7 +32,7 @@ class Normalizer
      * @see https://secure.php.net/manual/en/reserved.keywords.php
      * @see https://www.php.net/manual/en/reserved.other-reserved-words.php
      */
-    private static $reservedKeywords = [
+    private static array $reservedKeywords = [
         '__halt_compiler',
         'abstract',
         'and',
@@ -144,7 +142,7 @@ class Normalizer
     {
         $parts = array_filter(preg_split($regexp, $word));
         $keepUnchanged = array_shift($parts);
-        $parts = array_map('ucfirst', $parts);
+        $parts = array_map(fn($i) => ucfirst($i), $parts);
         array_unshift($parts, $keepUnchanged);
 
         $implode = implode('', $parts);

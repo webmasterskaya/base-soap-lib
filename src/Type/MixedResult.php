@@ -7,14 +7,14 @@ class MixedResult implements ResultInterface
     /**
      * @var mixed
      */
-    private $result;
+    private mixed $result;
 
     /**
      * MixedResult constructor.
      *
      * @param mixed $result
      */
-    public function __construct($result)
+    public function __construct(mixed $result)
     {
         $this->result = $result;
     }
@@ -22,7 +22,7 @@ class MixedResult implements ResultInterface
     /**
      * @return mixed
      */
-    public function getResult()
+    public function getResult(): mixed
     {
         return $this->result;
     }

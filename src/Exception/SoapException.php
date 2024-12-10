@@ -7,6 +7,7 @@ use Throwable;
 class SoapException extends RuntimeException
 {
     /**
+     * @param   \Throwable  $throwable
      *
      * @return SoapException
      */

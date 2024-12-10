@@ -13,15 +13,15 @@ class ManipulatedMetadata implements Metadata
     /**
      * @var Metadata
      */
-    private $metadata;
+    private Metadata $metadata;
     /**
      * @var TypesManipulatorInterface
      */
-    private $typesChangingStrategy;
+    private TypesManipulatorInterface $typesChangingStrategy;
     /**
      * @var MethodsManipulatorInterface
      */
-    private $methodsChangingStrategyInterface;
+    private MethodsManipulatorInterface $methodsChangingStrategyInterface;
 
     public function __construct(
         Metadata $metadata,

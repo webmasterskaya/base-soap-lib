@@ -23,7 +23,7 @@ abstract class ClientFactoryAbstract implements ClientFactoryInterface
     /**
      * @var string|null
      */
-    protected static $clientClass = null;
+    protected static ?string $clientClass = null;
 
     public static function create(
         array $options,

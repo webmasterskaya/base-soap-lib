@@ -12,12 +12,12 @@ final class MetadataOptions
     /**
      * @var MethodsManipulatorInterface
      */
-    private $methodsManipulator;
+    private MethodsManipulatorInterface $methodsManipulator;
 
     /**
      * @var TypesManipulatorInterface
      */
-    private $typesManipulator;
+    private TypesManipulatorInterface $typesManipulator;
 
     public function __construct(
         MethodsManipulatorInterface $methodsManipulator,
