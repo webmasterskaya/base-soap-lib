@@ -18,6 +18,8 @@ use Webmasterskaya\Soap\Base\Soap\ExtSoap\Configuration\ClientClassMapCollection
 use Webmasterskaya\Soap\Base\Soap\ExtSoap\Configuration\ClientTypeConverterCollectionInterface;
 use Webmasterskaya\Soap\Base\Soap\Metadata\MetadataOptions;
 
+use function Psl\Str\is_empty;
+
 abstract class ClientFactoryAbstract implements ClientFactoryInterface
 {
     protected static ?string $clientClass = null;
@@ -140,7 +142,7 @@ abstract class ClientFactoryAbstract implements ClientFactoryInterface
     {
         $classname = static::$clientClass;
 
-        if (empty($classname)) {
+        if (is_empty($classname)) {
             $classname = substr(static::class, 0, -7);
         }
 
