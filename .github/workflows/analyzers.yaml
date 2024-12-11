@@ -7,7 +7,7 @@ jobs:
         strategy:
             matrix:
                 operating-system: [ubuntu-latest]
-                php-versions: ['7.1', '7.2', '7.3', '7.4']
+                php-versions: ['8.2', '8.3', '8.4']
             fail-fast: false
         name: PHP ${{ matrix.php-versions }} @ ${{ matrix.operating-system }}
         steps:
@@ -19,7 +19,9 @@ jobs:
                   php-version: ${{ matrix.php-versions }}
                   tools: 'composer:v2'
                   extensions: pcov, mbstring, posix, dom, soap
+                  coverage: none
+                  ini-values: opcache.enable_cli=1, opcache.jit=tracing, opcache.jit_buffer_size=64M
             - name: Install dependencies
               run: composer update --prefer-dist --no-progress --no-suggest ${{ matrix.composer-options }}
             - name: Run the tests
-              run: ./tools/psalm.phar
+              run: composer run-script psalm

@@ -32,6 +32,9 @@
 		],
 		"cs-fix": [
 			"php-cs-fixer fix --ansi"
+		],
+		"psalm" : [
+			"psalm"
 		]
 	}
 }
