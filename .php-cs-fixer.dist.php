@@ -1,6 +1,7 @@
 <?php
 
-return (new PhpCsFixer\Config())
+return (new \PhpCsFixer\Config())
+    ->setParallelConfig(\PhpCsFixer\Runner\Parallel\ParallelConfigFactory::detect())
     ->setFinder(
         \Symfony\Component\Finder\Finder::create()
             ->in([
