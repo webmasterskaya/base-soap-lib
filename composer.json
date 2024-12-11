@@ -1,24 +1,25 @@
 {
-  "name": "webmasterskaya/base-soap-lib",
-  "description": "Набор базовых классов для построения PHP-SOAP приложения, совместимый с PHP 7.1",
-  "type": "library",
-  "license": "MIT",
-  "autoload": {
-    "psr-4": {
-      "Webmasterskaya\\Soap\\Base\\": "src/"
-    }
-  },
-  "authors": [
-    {
-      "name": "Artem Vasilev",
-      "email": "dev@webmasterskaya.xyz"
-    }
-  ],
-  "require": {
-    "php": "~8.2.0 || ~8.3.0 || ~8.4.0",
-    "php-soap/engine": "^2.13",
-    "php-soap/ext-soap-engine": "^1.7",
-    "php-soap/wsdl-reader": "~0.18",
-    "symfony/options-resolver": "^5.4"
-  }
+	"name": "webmasterskaya/base-soap-lib",
+	"description": "Набор базовых классов для построения PHP-SOAP приложения, совместимый с PHP 7.1",
+	"type": "library",
+	"license": "MIT",
+	"autoload": {
+		"psr-4": {
+			"Webmasterskaya\\Soap\\Base\\": "src/"
+		}
+	},
+	"authors": [
+		{
+			"name": "Artem Vasilev",
+			"email": "dev@webmasterskaya.xyz"
+		}
+	],
+	"require": {
+		"php": "~8.2.0 || ~8.3.0 || ~8.4.0",
+		"azjezz/psl": "^3.1",
+		"php-soap/engine": "^2.13",
+		"php-soap/ext-soap-engine": "^1.7",
+		"php-soap/wsdl": "^1.12",
+		"symfony/options-resolver": "^5.4"
+	}
 }
