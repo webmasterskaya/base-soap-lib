@@ -2,8 +2,10 @@
 <psalm
         errorLevel="2"
         resolveFromConfigFile="true"
+        findUnusedBaselineEntry="true"
+        findUnusedCode="false"
         strictBinaryOperands="true"
-        phpVersion="7.1"
+        phpVersion="8.2"
         allowStringToStandInForClass="true"
         rememberPropertyAssignmentsAfterCall="false"
         skipChecksOnUnresolvableIncludes="false"
