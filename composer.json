@@ -21,5 +21,17 @@
 		"php-soap/ext-soap-engine": "^1.7",
 		"php-soap/wsdl": "^1.12",
 		"symfony/options-resolver": "^5.4"
+	},
+	"require-dev": {
+		"friendsofphp/php-cs-fixer": "^3.65",
+		"vimeo/psalm": "^5.26"
+	},
+	"scripts" : {
+		"cs": [
+			"php-cs-fixer fix --ansi --dry-run --diff"
+		],
+		"cs-fix": [
+			"php-cs-fixer fix --ansi"
+		]
 	}
 }

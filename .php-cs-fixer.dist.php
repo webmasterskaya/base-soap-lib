@@ -13,13 +13,6 @@ return (new PhpCsFixer\Config())
         '@PSR12' => true,
         'align_multiline_comment' => true,
         'array_indentation' => true,
-        'declare_strict_types' => false,
-        'final_class' => false,
-        'global_namespace_import' => [
-            'import_classes' => true,
-            'import_constants' => true,
-            'import_functions' => true,
-        ],
         'list_syntax' => [
             'syntax' => 'short',
         ],
