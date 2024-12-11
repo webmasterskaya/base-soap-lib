@@ -20,9 +20,6 @@ use Webmasterskaya\Soap\Base\Soap\Metadata\MetadataOptions;
 
 abstract class ClientFactoryAbstract implements ClientFactoryInterface
 {
-    /**
-     * @var string|null
-     */
     protected static ?string $clientClass = null;
 
     public static function create(

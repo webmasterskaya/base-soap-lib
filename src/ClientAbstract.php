@@ -17,14 +17,8 @@ use Webmasterskaya\Soap\Base\Type\ResultProviderInterface;
 
 abstract class ClientAbstract implements ClientInterface
 {
-    /**
-     * @var Engine
-     */
     protected Engine $engine;
 
-    /**
-     * @var array
-     */
     protected array $defaults = [];
 
     public function __construct(

@@ -6,9 +6,6 @@ use Webmasterskaya\Soap\Base\Exception\RuntimeException;
 
 class Normalizer
 {
-    /**
-     * @var array
-     */
     private static array $normalizations = [
         'any' => 'mixed',
         'anytype' => 'mixed',
@@ -28,7 +25,6 @@ class Normalizer
     ];
 
     /**
-     * @var array
      * @see https://secure.php.net/manual/en/reserved.keywords.php
      * @see https://www.php.net/manual/en/reserved.other-reserved-words.php
      */
@@ -142,7 +138,7 @@ class Normalizer
     {
         $parts = array_filter(preg_split($regexp, $word));
         $keepUnchanged = array_shift($parts);
-        $parts = array_map(fn($i) => ucfirst($i), $parts);
+        $parts = array_map(static fn ($i) => ucfirst($i), $parts);
         array_unshift($parts, $keepUnchanged);
 
         $implode = implode('', $parts);

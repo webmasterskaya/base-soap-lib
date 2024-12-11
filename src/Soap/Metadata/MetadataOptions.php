@@ -9,14 +9,8 @@ use Webmasterskaya\Soap\Base\Soap\Metadata\Manipulators\TypesManipulatorInterfac
 
 final class MetadataOptions
 {
-    /**
-     * @var MethodsManipulatorInterface
-     */
     private MethodsManipulatorInterface $methodsManipulator;
 
-    /**
-     * @var TypesManipulatorInterface
-     */
     private TypesManipulatorInterface $typesManipulator;
 
     public function __construct(
