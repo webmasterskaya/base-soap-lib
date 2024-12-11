@@ -2,9 +2,9 @@
 
 namespace Webmasterskaya\Soap\Base;
 
-use Soap\ExtSoapEngine\ExtSoapOptions;
+use Webmasterskaya\Soap\Base\Caller\CallerInterface;
 
 interface ClientInterface
 {
-    public function __construct(ExtSoapOptions $options);
+    public function __construct(CallerInterface $caller);
 }

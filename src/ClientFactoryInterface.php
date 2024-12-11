@@ -2,26 +2,18 @@
 
 namespace Webmasterskaya\Soap\Base;
 
+use Psr\EventDispatcher\EventDispatcherInterface;
 use Soap\Engine\Transport;
-use Soap\ExtSoapEngine\Wsdl\PassThroughWsdlProvider;
-use Webmasterskaya\Soap\Base\Soap\ExtSoap\Configuration\ClientClassMapCollectionInterface;
-use Webmasterskaya\Soap\Base\Soap\ExtSoap\Configuration\ClientTypeConverterCollectionInterface;
+use Soap\ExtSoapEngine\ExtSoapOptions;
 use Webmasterskaya\Soap\Base\Soap\Metadata\MetadataOptions;
 
 interface ClientFactoryInterface
 {
     public static function create(
-        array $options,
-        string $wsdlProviderClass = PassThroughWsdlProvider::class,
-        ?ClientClassMapCollectionInterface $classMap = null,
-        ?ClientTypeConverterCollectionInterface $typeMap = null,
+        string $wsdl,
+        ?ExtSoapOptions $options = null,
         ?Transport $transport = null,
-        ?MetadataOptions $metadataOptions = null
+        ?MetadataOptions $metadataOptions = null,
+        ?EventDispatcherInterface $eventDispatcher = null
     ): ClientInterface;
-
-    public static function getClientClassName(): string;
-
-    public static function getDefaultClientClassMap(): ClientClassMapCollectionInterface;
-
-    public static function getDefaultClientTypeMap(): ClientTypeConverterCollectionInterface;
 }

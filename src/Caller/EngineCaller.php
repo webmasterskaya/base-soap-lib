@@ -1,47 +1,29 @@
 <?php
 
-namespace Webmasterskaya\Soap\Base;
+namespace Webmasterskaya\Soap\Base\Caller;
 
 use Exception;
 use Soap\Engine\Engine;
-use Soap\Engine\Transport;
-use Soap\ExtSoapEngine\ExtSoapOptions;
 use Webmasterskaya\Soap\Base\Exception\SoapException;
-use Webmasterskaya\Soap\Base\Soap\DefaultEngineFactory;
-use Webmasterskaya\Soap\Base\Soap\Metadata\MetadataOptions;
 use Webmasterskaya\Soap\Base\Type\MixedResult;
 use Webmasterskaya\Soap\Base\Type\MultiArgumentRequestInterface;
 use Webmasterskaya\Soap\Base\Type\RequestInterface;
 use Webmasterskaya\Soap\Base\Type\ResultInterface;
 use Webmasterskaya\Soap\Base\Type\ResultProviderInterface;
 
-abstract class ClientAbstract implements ClientInterface
+final readonly class EngineCaller implements CallerInterface
 {
-    protected Engine $engine;
-
-    protected array $defaults = [];
-
     public function __construct(
-        ExtSoapOptions $options,
-        ?Transport $transport = null,
-        ?MetadataOptions $metadataOptions = null
+        private Engine $engine
     ) {
-        $options = ExtSoapOptions::defaults(
-            $options->getWsdl(),
-            array_merge(
-                $this->defaults,
-                $options->getOptions()
-            )
-        );
-
-        $this->engine = DefaultEngineFactory::create($options, $transport, $metadataOptions);
     }
 
-    public function call(string $method, RequestInterface $request): ResultInterface
+    public function __invoke(string $method, RequestInterface $request): ResultInterface
     {
         try {
+            /** @noinspection PhpConditionAlreadyCheckedInspection */
             $arguments = ($request instanceof MultiArgumentRequestInterface) ? $request->getArguments() : [$request];
-            $result = $this->engine->request($method, $arguments);
+            $result    = $this->engine->request($method, $arguments);
 
             if ($result instanceof ResultProviderInterface) {
                 $result = $result->getResult();
