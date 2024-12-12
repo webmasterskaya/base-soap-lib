@@ -46,10 +46,10 @@ class IntersectDuplicateTypesStrategy implements TypesManipulatorInterface
             current(iterator_to_array($duplicateTypes))->getXsdType(),
             $this->uniqueProperties(
                 new PropertyCollection(...array_merge(
-                    ...$duplicateTypes->map(
-                        static function (Type $type): array {
-                            return iterator_to_array($type->getProperties());
-                        }
+                    ...array_values(
+                        $duplicateTypes->map(
+                            static fn (Type $type): array => iterator_to_array($type->getProperties())
+                        )
                     )
                 ))
             )

@@ -1,6 +1,7 @@
 <?php
 
-return (new PhpCsFixer\Config())
+return (new \PhpCsFixer\Config())
+    ->setParallelConfig(\PhpCsFixer\Runner\Parallel\ParallelConfigFactory::detect())
     ->setFinder(
         \Symfony\Component\Finder\Finder::create()
             ->in([
@@ -13,8 +14,6 @@ return (new PhpCsFixer\Config())
         '@PSR12' => true,
         'align_multiline_comment' => true,
         'array_indentation' => true,
-        'declare_strict_types' => false,
-        'final_class' => false,
         'global_namespace_import' => [
             'import_classes' => true,
             'import_constants' => true,

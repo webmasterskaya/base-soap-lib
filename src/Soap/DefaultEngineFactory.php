@@ -23,14 +23,17 @@ final class DefaultEngineFactory
         ?Transport $transport = null,
         ?MetadataOptions $metadataOptions = null
     ): Engine {
-        $metadataOptions = $metadataOptions ?? MetadataOptions::empty()->withTypesManipulator(
-            new IntersectDuplicateTypesStrategy()
-        );
-
         return new LazyEngine(static function () use ($options, $transport, $metadataOptions) {
             $client = AbusedClient::createFromOptions($options);
 
-            $transport = $transport ?? new TraceableTransport($client, new ExtSoapClientTransport($client));
+            $transport       ??= new TraceableTransport($client, new ExtSoapClientTransport($client));
+            $metadataOptions ??= MetadataOptions::empty()->withTypesManipulator(
+                /**
+                 * Ext-soap is not able to work with duplicate types
+                 * Therefore, we decided to combine all duplicate types into 1 big intersected type by default instead.
+                 */
+                new IntersectDuplicateTypesStrategy()
+            );
 
             $driver = ExtSoapDriver::createFromClient(
                 $client,

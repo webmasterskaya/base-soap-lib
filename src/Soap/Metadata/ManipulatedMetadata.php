@@ -10,18 +10,9 @@ use Webmasterskaya\Soap\Base\Soap\Metadata\Manipulators\TypesManipulatorInterfac
 
 class ManipulatedMetadata implements Metadata
 {
-    /**
-     * @var Metadata
-     */
-    private $metadata;
-    /**
-     * @var TypesManipulatorInterface
-     */
-    private $typesChangingStrategy;
-    /**
-     * @var MethodsManipulatorInterface
-     */
-    private $methodsChangingStrategyInterface;
+    private Metadata $metadata;
+    private TypesManipulatorInterface $typesChangingStrategy;
+    private MethodsManipulatorInterface $methodsChangingStrategyInterface;
 
     public function __construct(
         Metadata $metadata,

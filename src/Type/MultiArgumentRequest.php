@@ -4,15 +4,8 @@ namespace Webmasterskaya\Soap\Base\Type;
 
 class MultiArgumentRequest implements MultiArgumentRequestInterface
 {
-    /**
-     * @var array
-     */
-    private $arguments;
+    private array $arguments;
 
-    /**
-     * MultiArgumentRequest constructor.
-     *
-     */
     public function __construct(array $arguments)
     {
         $this->arguments = $arguments;

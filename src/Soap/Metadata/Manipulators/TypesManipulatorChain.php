@@ -9,7 +9,7 @@ final class TypesManipulatorChain implements TypesManipulatorInterface
     /**
      * @var TypesManipulatorInterface[]
      */
-    private $manipulators;
+    private array $manipulators;
 
     public function __construct(TypesManipulatorInterface ...$manipulators)
     {

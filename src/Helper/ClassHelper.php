@@ -4,29 +4,19 @@ namespace Webmasterskaya\Soap\Base\Helper;
 
 class ClassHelper
 {
-    /**
-     * @param object|string $class
-     */
-    public static function shouldImplement($class, string $interface): bool
+    public static function shouldImplement(object|string $class, string $interface): bool
     {
         $interfaces = class_implements($class);
 
         return isset($interfaces[$interface]);
     }
 
-    /**
-     * @param object|string $class
-     */
-    public static function shouldNotImplement($class, string $interface): bool
+    public static function shouldNotImplement(object|string $class, string $interface): bool
     {
         return !static::shouldImplement($class, $interface);
     }
 
-    /**
-     * @param object|string $class
-     * @param object|string $instance
-     */
-    public static function shouldBeAnInstanceOf($class, $instance): bool
+    public static function shouldBeAnInstanceOf(object|string $class, object|string $instance): bool
     {
         if (is_object($class)) {
             return $class instanceof $instance;
@@ -42,11 +32,7 @@ class ClassHelper
         return isset($parents[$instance]);
     }
 
-    /**
-     * @param object|string $class
-     * @param object|string $instance
-     */
-    public static function shouldNotBeAnInstanceOf($class, $instance): bool
+    public static function shouldNotBeAnInstanceOf(object|string $class, object|string $instance): bool
     {
         return !static::shouldBeAnInstanceOf($class, $instance);
     }
