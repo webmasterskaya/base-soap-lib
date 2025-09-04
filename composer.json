@@ -1,6 +1,6 @@
 {
   "name": "webmasterskaya/base-soap-lib",
-  "description": "Набор базовых классов для построения PHP-SOAP приложения, совместимый с PHP 7.1",
+  "description": "Набор базовых классов для построения PHP-SOAP приложения, совместимый с PHP >=8.2",
   "type": "library",
   "license": "MIT",
   "autoload": {
@@ -22,13 +22,13 @@
     "php-soap/encoding": "~0.15",
     "php-soap/psr18-transport": "^1.7",
     "php-soap/wsdl-reader": "~0.21",
-    "psr/event-dispatcher": "^1.0",
-    "symfony/http-client": "^7.3"
+    "psr/event-dispatcher": "^1.0"
   },
   "require-dev": {
     "nyholm/psr7": "^1.8",
     "friendsofphp/php-cs-fixer": "^3.65",
-    "symfony/cache": "^6.4 || ^7.0"
+    "symfony/cache": "^6.4 || ^7.0",
+    "symfony/http-client": "^7.3"
   },
   "scripts": {
     "cs": [

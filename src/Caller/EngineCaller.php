@@ -21,7 +21,6 @@ final readonly class EngineCaller implements CallerInterface
     public function __invoke(string $method, RequestInterface $request): ResultInterface
     {
         try {
-            /** @noinspection PhpConditionAlreadyCheckedInspection */
             $arguments = ($request instanceof MultiArgumentRequestInterface) ? $request->getArguments() : [$request];
             $result    = $this->engine->request($method, $arguments);
 
