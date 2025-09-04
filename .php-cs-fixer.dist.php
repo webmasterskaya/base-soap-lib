@@ -1,17 +1,24 @@
 <?php
 
-return (new \PhpCsFixer\Config())
-    ->setParallelConfig(\PhpCsFixer\Runner\Parallel\ParallelConfigFactory::detect())
+use PhpCsFixer\Config;
+use PhpCsFixer\Finder;
+use PhpCsFixer\Runner\Parallel\ParallelConfigFactory;
+
+return (new Config())
+    ->setParallelConfig(ParallelConfigFactory::detect())
     ->setFinder(
-        \Symfony\Component\Finder\Finder::create()
+        Finder::create()
             ->in([
                 __DIR__ . '/src',
+                __DIR__ . '/example',
             ])
-            ->name('*.php')
+            ->name('*.php'),
     )
     ->setRiskyAllowed(true)
     ->setRules([
         '@PSR12' => true,
+        '@PSR12:risky' => true,
+        '@PHP82Migration' => true,
         'align_multiline_comment' => true,
         'array_indentation' => true,
         'global_namespace_import' => [
@@ -22,15 +29,12 @@ return (new \PhpCsFixer\Config())
         'list_syntax' => [
             'syntax' => 'short',
         ],
-        'constant_case' => [
-            'case' => 'lower',
-        ],
         'multiline_comment_opening_closing' => true,
         'native_function_casing' => true,
         'no_empty_phpdoc' => true,
         'no_leading_import_slash' => true,
         'no_superfluous_phpdoc_tags' => [
-            'allow_mixed' => true,
+            'remove_inheritdoc' => true,
         ],
         'no_unused_imports' => true,
         'no_useless_else' => true,
@@ -51,4 +55,7 @@ return (new \PhpCsFixer\Config())
         'static_lambda' => true,
         'strict_comparison' => true,
         'strict_param' => true,
+        'multiline_promoted_properties' => true,
+        'yoda_style' => false,
+        'is_null' => false,
     ]);

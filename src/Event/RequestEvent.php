@@ -8,7 +8,7 @@ class RequestEvent
 {
     public function __construct(
         protected string $method,
-        private RequestInterface $request
+        protected RequestInterface $request
     ) {
     }
 

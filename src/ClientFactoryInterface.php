@@ -3,17 +3,16 @@
 namespace Webmasterskaya\Soap\Base;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Soap\Engine\Transport;
-use Soap\ExtSoapEngine\ExtSoapOptions;
-use Webmasterskaya\Soap\Base\Soap\Metadata\MetadataOptions;
+use Webmasterskaya\Soap\Base\Soap\EngineOptions;
 
 interface ClientFactoryInterface
 {
+    /**
+     * @param non-empty-string $wsdl
+     */
     public static function create(
         string $wsdl,
-        ?ExtSoapOptions $options = null,
-        ?Transport $transport = null,
-        ?MetadataOptions $metadataOptions = null,
-        ?EventDispatcherInterface $eventDispatcher = null
+        ?EngineOptions $options = null,
+        ?EventDispatcherInterface $eventDispatcher = null,
     ): ClientInterface;
 }
